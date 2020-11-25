@@ -6,12 +6,15 @@ package com.example.simplerecyclerview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
     var list = generateDummyList(10)
     val adapter = ItemAdapter(list)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun generateDummyList(size:Int): List<Item>{
+    private fun generateDummyList(size:Int): ArrayList<Item>{
         val looplist = ArrayList<Item>()
 
         for (i in 0 until size){
@@ -39,4 +42,13 @@ class MainActivity : AppCompatActivity() {
         }
         return looplist;
     }
+
+    fun insertItem(view: View) {
+        val newItem = Item(
+            R.drawable.headset,
+            "New Item")
+        list.add(0, newItem)
+        adapter.notifyItemInserted(0)
+    }
+
 }
