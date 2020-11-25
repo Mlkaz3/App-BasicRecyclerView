@@ -1,7 +1,7 @@
 package com.example.simplerecyclerview
 //Credit:https://www.youtube.com/channel/UC_Fh8kvtkVPkeihBs42jGcA
-//Insert & Remove Item :https://www.youtube.com/watch?v=XyQvoONPMng
-//
+//Insert & Remove Item (video):https://www.youtube.com/watch?v=XyQvoONPMng
+//Insert & Remove Item (code):https://codinginflow.com/tutorials/android/simple-recyclerview-kotlin/part-3-insert-remove-items
 //
 
 import androidx.appcompat.app.AppCompatActivity
@@ -10,22 +10,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
-
+    var list = generateDummyList(10)
+    val adapter = ItemAdapter(list)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val recyclerview:RecyclerView = findViewById(R.id.rv)
 
-        val list = generateDummyList(10)
-        recyclerview.adapter = ItemAdapter(list)
+        recyclerview.adapter = adapter
         recyclerview.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         recyclerview.setHasFixedSize(true)
 
     }
 
     private fun generateDummyList(size:Int): List<Item>{
-        val list = ArrayList<Item>()
+        val looplist = ArrayList<Item>()
 
         for (i in 0 until size){
             val drawable = when (i%3){
@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             val item = Item(drawable, "Item$i")
-            list += item
+            looplist += item
         }
-        return list;
+        return looplist;
     }
 }
